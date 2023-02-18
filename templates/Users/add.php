@@ -15,7 +15,7 @@
         <div class="users form content">
             <?= $this->Form->create($user) ?>
             <fieldset>
-                <legend><?= __('Add User') ?></legend>
+                <legend><?= __('Thêm Người dùng') ?></legend>
                 <?php
                     echo $this->Form->control('username');
                     echo $this->Form->control('password');

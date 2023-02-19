@@ -23,6 +23,7 @@ class ProductsReceivedDetailsControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.ProductsReceivedDetails',
+        'app.Products',
     ];
 
     /**

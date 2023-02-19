@@ -4,12 +4,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 /**
- * MaterialsReceivedNote Controller
+ * MaterialsReceivedNotes Controller
  *
- * @property \App\Model\Table\MaterialsReceivedNoteTable $MaterialsReceivedNote
  * @method \App\Model\Entity\MaterialsReceivedNote[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class MaterialsReceivedNoteController extends AppController
+class MaterialsReceivedNotesController extends AppController
 {
     /**
      * Index method
@@ -18,12 +17,9 @@ class MaterialsReceivedNoteController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Products', 'Receivers'],
-        ];
-        $materialsReceivedNote = $this->paginate($this->MaterialsReceivedNote);
+        $materialsReceivedNotes = $this->paginate($this->MaterialsReceivedNotes);
 
-        $this->set(compact('materialsReceivedNote'));
+        $this->set(compact('materialsReceivedNotes'));
     }
 
     /**
@@ -35,8 +31,8 @@ class MaterialsReceivedNoteController extends AppController
      */
     public function view($id = null)
     {
-        $materialsReceivedNote = $this->MaterialsReceivedNote->get($id, [
-            'contain' => ['Products', 'Receivers'],
+        $materialsReceivedNote = $this->MaterialsReceivedNotes->get($id, [
+            'contain' => [],
         ]);
 
         $this->set(compact('materialsReceivedNote'));
@@ -49,19 +45,17 @@ class MaterialsReceivedNoteController extends AppController
      */
     public function add()
     {
-        $materialsReceivedNote = $this->MaterialsReceivedNote->newEmptyEntity();
+        $materialsReceivedNote = $this->MaterialsReceivedNotes->newEmptyEntity();
         if ($this->request->is('post')) {
-            $materialsReceivedNote = $this->MaterialsReceivedNote->patchEntity($materialsReceivedNote, $this->request->getData());
-            if ($this->MaterialsReceivedNote->save($materialsReceivedNote)) {
+            $materialsReceivedNote = $this->MaterialsReceivedNotes->patchEntity($materialsReceivedNote, $this->request->getData());
+            if ($this->MaterialsReceivedNotes->save($materialsReceivedNote)) {
                 $this->Flash->success(__('The materials received note has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The materials received note could not be saved. Please, try again.'));
         }
-        $products = $this->MaterialsReceivedNote->Products->find('list', ['limit' => 200])->all();
-        $receivers = $this->MaterialsReceivedNote->Receivers->find('list', ['limit' => 200])->all();
-        $this->set(compact('materialsReceivedNote', 'products', 'receivers'));
+        $this->set(compact('materialsReceivedNote'));
     }
 
     /**
@@ -73,21 +67,19 @@ class MaterialsReceivedNoteController extends AppController
      */
     public function edit($id = null)
     {
-        $materialsReceivedNote = $this->MaterialsReceivedNote->get($id, [
+        $materialsReceivedNote = $this->MaterialsReceivedNotes->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $materialsReceivedNote = $this->MaterialsReceivedNote->patchEntity($materialsReceivedNote, $this->request->getData());
-            if ($this->MaterialsReceivedNote->save($materialsReceivedNote)) {
+            $materialsReceivedNote = $this->MaterialsReceivedNotes->patchEntity($materialsReceivedNote, $this->request->getData());
+            if ($this->MaterialsReceivedNotes->save($materialsReceivedNote)) {
                 $this->Flash->success(__('The materials received note has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The materials received note could not be saved. Please, try again.'));
         }
-        $products = $this->MaterialsReceivedNote->Products->find('list', ['limit' => 200])->all();
-        $receivers = $this->MaterialsReceivedNote->Receivers->find('list', ['limit' => 200])->all();
-        $this->set(compact('materialsReceivedNote', 'products', 'receivers'));
+        $this->set(compact('materialsReceivedNote'));
     }
 
     /**
@@ -100,8 +92,8 @@ class MaterialsReceivedNoteController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $materialsReceivedNote = $this->MaterialsReceivedNote->get($id);
-        if ($this->MaterialsReceivedNote->delete($materialsReceivedNote)) {
+        $materialsReceivedNote = $this->MaterialsReceivedNotes->get($id);
+        if ($this->MaterialsReceivedNotes->delete($materialsReceivedNote)) {
             $this->Flash->success(__('The materials received note has been deleted.'));
         } else {
             $this->Flash->error(__('The materials received note could not be deleted. Please, try again.'));

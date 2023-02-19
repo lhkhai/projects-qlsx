@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * ProductsIssueDetails Controller
  *
+ * @property \App\Model\Table\ProductsIssueDetailsTable $ProductsIssueDetails
  * @method \App\Model\Entity\ProductsIssueDetail[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ProductsIssueDetailsController extends AppController
@@ -17,6 +18,9 @@ class ProductsIssueDetailsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Products'],
+        ];
         $productsIssueDetails = $this->paginate($this->ProductsIssueDetails);
 
         $this->set(compact('productsIssueDetails'));
@@ -32,7 +36,7 @@ class ProductsIssueDetailsController extends AppController
     public function view($id = null)
     {
         $productsIssueDetail = $this->ProductsIssueDetails->get($id, [
-            'contain' => [],
+            'contain' => ['Products'],
         ]);
 
         $this->set(compact('productsIssueDetail'));
@@ -55,7 +59,8 @@ class ProductsIssueDetailsController extends AppController
             }
             $this->Flash->error(__('The products issue detail could not be saved. Please, try again.'));
         }
-        $this->set(compact('productsIssueDetail'));
+        $products = $this->ProductsIssueDetails->Products->find('list', ['limit' => 200])->all();
+        $this->set(compact('productsIssueDetail', 'products'));
     }
 
     /**
@@ -79,7 +84,8 @@ class ProductsIssueDetailsController extends AppController
             }
             $this->Flash->error(__('The products issue detail could not be saved. Please, try again.'));
         }
-        $this->set(compact('productsIssueDetail'));
+        $products = $this->ProductsIssueDetails->Products->find('list', ['limit' => 200])->all();
+        $this->set(compact('productsIssueDetail', 'products'));
     }
 
     /**

@@ -6,9 +6,9 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * MaterialsFixture
+ * ProductsIssueNotesFixture
  */
-class MaterialsFixture extends TestFixture
+class ProductsIssueNotesFixture extends TestFixture
 {
     /**
      * Init method
@@ -20,14 +20,19 @@ class MaterialsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'name' => 'Lorem ipsum dolor sit amet',
-                'code' => 'Lorem ipsum dolor sit amet',
+                'order_number' => 'Lorem ipsum dolor sit amet',
+                'warehouse_from' => 1,
+                'customer_id' => 1,
                 'remark' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'created_at' => '2023-02-19 13:04:28',
+                'note_maker' => 1,
+                'receiver_id' => 1,
+                'stockkeeper_fk' => 1,
+                'approver_fk' => 1,
+                'created_at' => '2023-02-19 13:13:24',
                 'created_by' => 1,
-                'modified_at' => '2023-02-19 13:04:28',
+                'modified_at' => '2023-02-19 13:13:24',
                 'modified_by' => 1,
-                'deleted_at' => '2023-02-19 13:04:28',
+                'deleted_at' => '2023-02-19 13:13:24',
                 'deleted_by' => 1,
             ],
         ];

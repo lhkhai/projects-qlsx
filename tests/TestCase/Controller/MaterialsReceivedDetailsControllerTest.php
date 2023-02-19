@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\SubstancesIssueDetailsController;
+use App\Controller\MaterialsReceivedDetailsController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\SubstancesIssueDetailsController Test Case
+ * App\Controller\MaterialsReceivedDetailsController Test Case
  *
- * @uses \App\Controller\SubstancesIssueDetailsController
+ * @uses \App\Controller\MaterialsReceivedDetailsController
  */
-class SubstancesIssueDetailsControllerTest extends TestCase
+class MaterialsReceivedDetailsControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -22,15 +22,16 @@ class SubstancesIssueDetailsControllerTest extends TestCase
      * @var array<string>
      */
     protected $fixtures = [
-        'app.SubstancesIssueDetails',
-        'app.Products',
+        'app.MaterialsReceivedDetails',
+        'app.Materials',
+        'app.MaterialsReceivedNotes',
     ];
 
     /**
      * Test index method
      *
      * @return void
-     * @uses \App\Controller\SubstancesIssueDetailsController::index()
+     * @uses \App\Controller\MaterialsReceivedDetailsController::index()
      */
     public function testIndex(): void
     {
@@ -41,7 +42,7 @@ class SubstancesIssueDetailsControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \App\Controller\SubstancesIssueDetailsController::view()
+     * @uses \App\Controller\MaterialsReceivedDetailsController::view()
      */
     public function testView(): void
     {
@@ -52,7 +53,7 @@ class SubstancesIssueDetailsControllerTest extends TestCase
      * Test add method
      *
      * @return void
-     * @uses \App\Controller\SubstancesIssueDetailsController::add()
+     * @uses \App\Controller\MaterialsReceivedDetailsController::add()
      */
     public function testAdd(): void
     {
@@ -63,7 +64,7 @@ class SubstancesIssueDetailsControllerTest extends TestCase
      * Test edit method
      *
      * @return void
-     * @uses \App\Controller\SubstancesIssueDetailsController::edit()
+     * @uses \App\Controller\MaterialsReceivedDetailsController::edit()
      */
     public function testEdit(): void
     {
@@ -74,7 +75,7 @@ class SubstancesIssueDetailsControllerTest extends TestCase
      * Test delete method
      *
      * @return void
-     * @uses \App\Controller\SubstancesIssueDetailsController::delete()
+     * @uses \App\Controller\MaterialsReceivedDetailsController::delete()
      */
     public function testDelete(): void
     {

@@ -6,7 +6,6 @@ namespace App\Controller;
 /**
  * Substances Controller
  *
- * @property \App\Model\Table\SubstancesTable $Substances
  * @method \App\Model\Entity\Substance[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class SubstancesController extends AppController

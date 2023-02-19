@@ -9,7 +9,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * MaterialsReceivedNote Model
+ * MaterialsReceivedNotes Model
  *
  * @property \App\Model\Table\ProductsTable&\Cake\ORM\Association\BelongsTo $Products
  * @property \App\Model\Table\ReceiversTable&\Cake\ORM\Association\BelongsTo $Receivers
@@ -28,7 +28,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\MaterialsReceivedNote[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\MaterialsReceivedNote[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class MaterialsReceivedNoteTable extends Table
+class MaterialsReceivedNotesTable extends Table
 {
     /**
      * Initialize method
@@ -40,7 +40,7 @@ class MaterialsReceivedNoteTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('materials_received_note');
+        $this->setTable('materials_received_notes');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
@@ -49,12 +49,6 @@ class MaterialsReceivedNoteTable extends Table
         ]);
         $this->belongsTo('Receivers', [
             'foreignKey' => 'receiver_id',
-        ]);
-        $this->belongsTo('Employees', [
-            'foreignKey' => 'stockkeeper_fk',
-        ]);
-        $this->belongsTo('Employees', [
-            'foreignKey' => 'approver_fk',
         ]);
     }
 

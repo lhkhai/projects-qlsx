@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * SubstancesIssueDetails Controller
  *
+ * @property \App\Model\Table\SubstancesIssueDetailsTable $SubstancesIssueDetails
  * @method \App\Model\Entity\SubstancesIssueDetail[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class SubstancesIssueDetailsController extends AppController
@@ -17,6 +18,9 @@ class SubstancesIssueDetailsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Products'],
+        ];
         $substancesIssueDetails = $this->paginate($this->SubstancesIssueDetails);
 
         $this->set(compact('substancesIssueDetails'));
@@ -32,7 +36,7 @@ class SubstancesIssueDetailsController extends AppController
     public function view($id = null)
     {
         $substancesIssueDetail = $this->SubstancesIssueDetails->get($id, [
-            'contain' => [],
+            'contain' => ['Products'],
         ]);
 
         $this->set(compact('substancesIssueDetail'));
@@ -55,7 +59,8 @@ class SubstancesIssueDetailsController extends AppController
             }
             $this->Flash->error(__('The substances issue detail could not be saved. Please, try again.'));
         }
-        $this->set(compact('substancesIssueDetail'));
+        $products = $this->SubstancesIssueDetails->Products->find('list', ['limit' => 200])->all();
+        $this->set(compact('substancesIssueDetail', 'products'));
     }
 
     /**
@@ -79,7 +84,8 @@ class SubstancesIssueDetailsController extends AppController
             }
             $this->Flash->error(__('The substances issue detail could not be saved. Please, try again.'));
         }
-        $this->set(compact('substancesIssueDetail'));
+        $products = $this->SubstancesIssueDetails->Products->find('list', ['limit' => 200])->all();
+        $this->set(compact('substancesIssueDetail', 'products'));
     }
 
     /**

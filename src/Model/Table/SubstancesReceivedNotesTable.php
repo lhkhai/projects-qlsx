@@ -9,26 +9,26 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * ProductsIssueNote Model
+ * SubstancesReceivedNotes Model
  *
- * @property \App\Model\Table\CustomersTable&\Cake\ORM\Association\BelongsTo $Customers
+ * @property \App\Model\Table\ProductsTable&\Cake\ORM\Association\BelongsTo $Products
  * @property \App\Model\Table\ReceiversTable&\Cake\ORM\Association\BelongsTo $Receivers
  *
- * @method \App\Model\Entity\ProductsIssueNote newEmptyEntity()
- * @method \App\Model\Entity\ProductsIssueNote newEntity(array $data, array $options = [])
- * @method \App\Model\Entity\ProductsIssueNote[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\ProductsIssueNote get($primaryKey, $options = [])
- * @method \App\Model\Entity\ProductsIssueNote findOrCreate($search, ?callable $callback = null, $options = [])
- * @method \App\Model\Entity\ProductsIssueNote patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\ProductsIssueNote[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method \App\Model\Entity\ProductsIssueNote|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\ProductsIssueNote saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\ProductsIssueNote[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\ProductsIssueNote[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method \App\Model\Entity\ProductsIssueNote[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method \App\Model\Entity\ProductsIssueNote[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote newEmptyEntity()
+ * @method \App\Model\Entity\SubstancesReceivedNote newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote get($primaryKey, $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\SubstancesReceivedNote[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class ProductsIssueNoteTable extends Table
+class SubstancesReceivedNotesTable extends Table
 {
     /**
      * Initialize method
@@ -40,12 +40,12 @@ class ProductsIssueNoteTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('products_issue_note');
+        $this->setTable('substances_received_notes');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id',
+        $this->belongsTo('Products', [
+            'foreignKey' => 'product_id',
         ]);
         $this->belongsTo('Receivers', [
             'foreignKey' => 'receiver_id',
@@ -67,12 +67,38 @@ class ProductsIssueNoteTable extends Table
 
         $validator
             ->integer('warehouse_from')
-            ->requirePresence('warehouse_from', 'create')
-            ->notEmptyString('warehouse_from');
+            ->allowEmptyString('warehouse_from');
 
         $validator
-            ->integer('customer_id')
-            ->allowEmptyString('customer_id');
+            ->integer('receiving_unit')
+            ->allowEmptyString('receiving_unit');
+
+        $validator
+            ->scalar('phase')
+            ->maxLength('phase', 50)
+            ->allowEmptyString('phase');
+
+        $validator
+            ->integer('product_id')
+            ->allowEmptyString('product_id');
+
+        $validator
+            ->integer('batch_number')
+            ->allowEmptyString('batch_number');
+
+        $validator
+            ->integer('size_number')
+            ->allowEmptyString('size_number');
+
+        $validator
+            ->scalar('unit')
+            ->maxLength('unit', 50)
+            ->allowEmptyString('unit');
+
+        $validator
+            ->scalar('packing_specification')
+            ->maxLength('packing_specification', 150)
+            ->allowEmptyString('packing_specification');
 
         $validator
             ->scalar('remark')
@@ -83,7 +109,8 @@ class ProductsIssueNoteTable extends Table
             ->allowEmptyString('note_maker');
 
         $validator
-            ->integer('receiver_id')
+            ->scalar('receiver_id')
+            ->maxLength('receiver_id', 50)
             ->allowEmptyString('receiver_id');
 
         $validator
@@ -136,7 +163,7 @@ class ProductsIssueNoteTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('customer_id', 'Customers'), ['errorField' => 'customer_id']);
+        $rules->add($rules->existsIn('product_id', 'Products'), ['errorField' => 'product_id']);
         $rules->add($rules->existsIn('receiver_id', 'Receivers'), ['errorField' => 'receiver_id']);
 
         return $rules;

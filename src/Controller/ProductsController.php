@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * Products Controller
  *
+ * @property \App\Model\Table\ProductsTable $Products
  * @method \App\Model\Entity\Product[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ProductsController extends AppController
@@ -32,7 +33,7 @@ class ProductsController extends AppController
     public function view($id = null)
     {
         $product = $this->Products->get($id, [
-            'contain' => [],
+            'contain' => ['Inventory', 'MaterialsIssueDetails', 'MaterialsReceivedNote', 'ProductsIssueDetails', 'ProductsReceivedDetails', 'SubstancesIssueDetails', 'SubstancesReceivedNote'],
         ]);
 
         $this->set(compact('product'));

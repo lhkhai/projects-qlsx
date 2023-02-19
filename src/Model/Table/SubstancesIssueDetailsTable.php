@@ -46,9 +46,6 @@ class SubstancesIssueDetailsTable extends Table
         $this->belongsTo('Products', [
             'foreignKey' => 'product_id',
         ]);
-       // $this->belongTo('products_received_note', [
-        //    'foreignKey'=>'product_received_note_id'
-       // ]);
     }
 
     /**

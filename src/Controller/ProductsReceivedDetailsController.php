@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * ProductsReceivedDetails Controller
  *
+ * @property \App\Model\Table\ProductsReceivedDetailsTable $ProductsReceivedDetails
  * @method \App\Model\Entity\ProductsReceivedDetail[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ProductsReceivedDetailsController extends AppController
@@ -17,6 +18,9 @@ class ProductsReceivedDetailsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Products'],
+        ];
         $productsReceivedDetails = $this->paginate($this->ProductsReceivedDetails);
 
         $this->set(compact('productsReceivedDetails'));
@@ -32,7 +36,7 @@ class ProductsReceivedDetailsController extends AppController
     public function view($id = null)
     {
         $productsReceivedDetail = $this->ProductsReceivedDetails->get($id, [
-            'contain' => [],
+            'contain' => ['Products'],
         ]);
 
         $this->set(compact('productsReceivedDetail'));
@@ -55,7 +59,8 @@ class ProductsReceivedDetailsController extends AppController
             }
             $this->Flash->error(__('The products received detail could not be saved. Please, try again.'));
         }
-        $this->set(compact('productsReceivedDetail'));
+        $products = $this->ProductsReceivedDetails->Products->find('list', ['limit' => 200])->all();
+        $this->set(compact('productsReceivedDetail', 'products'));
     }
 
     /**
@@ -79,7 +84,8 @@ class ProductsReceivedDetailsController extends AppController
             }
             $this->Flash->error(__('The products received detail could not be saved. Please, try again.'));
         }
-        $this->set(compact('productsReceivedDetail'));
+        $products = $this->ProductsReceivedDetails->Products->find('list', ['limit' => 200])->all();
+        $this->set(compact('productsReceivedDetail', 'products'));
     }
 
     /**

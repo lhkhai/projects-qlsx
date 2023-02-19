@@ -4,12 +4,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 /**
- * ProductsReceivedNote Controller
+ * ProductsReceivedNotes Controller
  *
- * @property \App\Model\Table\ProductsReceivedNoteTable $ProductsReceivedNote
  * @method \App\Model\Entity\ProductsReceivedNote[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class ProductsReceivedNoteController extends AppController
+class ProductsReceivedNotesController extends AppController
 {
     /**
      * Index method
@@ -18,9 +17,9 @@ class ProductsReceivedNoteController extends AppController
      */
     public function index()
     {
-        $productsReceivedNote = $this->paginate($this->ProductsReceivedNote);
+        $productsReceivedNotes = $this->paginate($this->ProductsReceivedNotes);
 
-        $this->set(compact('productsReceivedNote'));
+        $this->set(compact('productsReceivedNotes'));
     }
 
     /**
@@ -32,7 +31,7 @@ class ProductsReceivedNoteController extends AppController
      */
     public function view($id = null)
     {
-        $productsReceivedNote = $this->ProductsReceivedNote->get($id, [
+        $productsReceivedNote = $this->ProductsReceivedNotes->get($id, [
             'contain' => [],
         ]);
 
@@ -46,10 +45,10 @@ class ProductsReceivedNoteController extends AppController
      */
     public function add()
     {
-        $productsReceivedNote = $this->ProductsReceivedNote->newEmptyEntity();
+        $productsReceivedNote = $this->ProductsReceivedNotes->newEmptyEntity();
         if ($this->request->is('post')) {
-            $productsReceivedNote = $this->ProductsReceivedNote->patchEntity($productsReceivedNote, $this->request->getData());
-            if ($this->ProductsReceivedNote->save($productsReceivedNote)) {
+            $productsReceivedNote = $this->ProductsReceivedNotes->patchEntity($productsReceivedNote, $this->request->getData());
+            if ($this->ProductsReceivedNotes->save($productsReceivedNote)) {
                 $this->Flash->success(__('The products received note has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -68,12 +67,12 @@ class ProductsReceivedNoteController extends AppController
      */
     public function edit($id = null)
     {
-        $productsReceivedNote = $this->ProductsReceivedNote->get($id, [
+        $productsReceivedNote = $this->ProductsReceivedNotes->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $productsReceivedNote = $this->ProductsReceivedNote->patchEntity($productsReceivedNote, $this->request->getData());
-            if ($this->ProductsReceivedNote->save($productsReceivedNote)) {
+            $productsReceivedNote = $this->ProductsReceivedNotes->patchEntity($productsReceivedNote, $this->request->getData());
+            if ($this->ProductsReceivedNotes->save($productsReceivedNote)) {
                 $this->Flash->success(__('The products received note has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -93,8 +92,8 @@ class ProductsReceivedNoteController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $productsReceivedNote = $this->ProductsReceivedNote->get($id);
-        if ($this->ProductsReceivedNote->delete($productsReceivedNote)) {
+        $productsReceivedNote = $this->ProductsReceivedNotes->get($id);
+        if ($this->ProductsReceivedNotes->delete($productsReceivedNote)) {
             $this->Flash->success(__('The products received note has been deleted.'));
         } else {
             $this->Flash->error(__('The products received note could not be deleted. Please, try again.'));

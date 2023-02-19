@@ -4,12 +4,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 /**
- * ProductsIssueNote Controller
+ * ProductsIssueNotes Controller
  *
- * @property \App\Model\Table\ProductsIssueNoteTable $ProductsIssueNote
  * @method \App\Model\Entity\ProductsIssueNote[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class ProductsIssueNoteController extends AppController
+class ProductsIssueNotesController extends AppController
 {
     /**
      * Index method
@@ -18,12 +17,9 @@ class ProductsIssueNoteController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Customers', 'Receivers'],
-        ];
-        $productsIssueNote = $this->paginate($this->ProductsIssueNote);
+        $productsIssueNotes = $this->paginate($this->ProductsIssueNotes);
 
-        $this->set(compact('productsIssueNote'));
+        $this->set(compact('productsIssueNotes'));
     }
 
     /**
@@ -35,8 +31,8 @@ class ProductsIssueNoteController extends AppController
      */
     public function view($id = null)
     {
-        $productsIssueNote = $this->ProductsIssueNote->get($id, [
-            'contain' => ['Customers', 'Receivers'],
+        $productsIssueNote = $this->ProductsIssueNotes->get($id, [
+            'contain' => [],
         ]);
 
         $this->set(compact('productsIssueNote'));
@@ -49,19 +45,17 @@ class ProductsIssueNoteController extends AppController
      */
     public function add()
     {
-        $productsIssueNote = $this->ProductsIssueNote->newEmptyEntity();
+        $productsIssueNote = $this->ProductsIssueNotes->newEmptyEntity();
         if ($this->request->is('post')) {
-            $productsIssueNote = $this->ProductsIssueNote->patchEntity($productsIssueNote, $this->request->getData());
-            if ($this->ProductsIssueNote->save($productsIssueNote)) {
+            $productsIssueNote = $this->ProductsIssueNotes->patchEntity($productsIssueNote, $this->request->getData());
+            if ($this->ProductsIssueNotes->save($productsIssueNote)) {
                 $this->Flash->success(__('The products issue note has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The products issue note could not be saved. Please, try again.'));
         }
-        $customers = $this->ProductsIssueNote->Customers->find('list', ['limit' => 200])->all();
-        $receivers = $this->ProductsIssueNote->Receivers->find('list', ['limit' => 200])->all();
-        $this->set(compact('productsIssueNote', 'customers', 'receivers'));
+        $this->set(compact('productsIssueNote'));
     }
 
     /**
@@ -73,21 +67,19 @@ class ProductsIssueNoteController extends AppController
      */
     public function edit($id = null)
     {
-        $productsIssueNote = $this->ProductsIssueNote->get($id, [
+        $productsIssueNote = $this->ProductsIssueNotes->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $productsIssueNote = $this->ProductsIssueNote->patchEntity($productsIssueNote, $this->request->getData());
-            if ($this->ProductsIssueNote->save($productsIssueNote)) {
+            $productsIssueNote = $this->ProductsIssueNotes->patchEntity($productsIssueNote, $this->request->getData());
+            if ($this->ProductsIssueNotes->save($productsIssueNote)) {
                 $this->Flash->success(__('The products issue note has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The products issue note could not be saved. Please, try again.'));
         }
-        $customers = $this->ProductsIssueNote->Customers->find('list', ['limit' => 200])->all();
-        $receivers = $this->ProductsIssueNote->Receivers->find('list', ['limit' => 200])->all();
-        $this->set(compact('productsIssueNote', 'customers', 'receivers'));
+        $this->set(compact('productsIssueNote'));
     }
 
     /**
@@ -100,8 +92,8 @@ class ProductsIssueNoteController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $productsIssueNote = $this->ProductsIssueNote->get($id);
-        if ($this->ProductsIssueNote->delete($productsIssueNote)) {
+        $productsIssueNote = $this->ProductsIssueNotes->get($id);
+        if ($this->ProductsIssueNotes->delete($productsIssueNote)) {
             $this->Flash->success(__('The products issue note has been deleted.'));
         } else {
             $this->Flash->error(__('The products issue note could not be deleted. Please, try again.'));

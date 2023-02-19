@@ -6,6 +6,7 @@ namespace App\Controller;
 /**
  * Materials Controller
  *
+ * @property \App\Model\Table\MaterialsTable $Materials
  * @method \App\Model\Entity\Material[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class MaterialsController extends AppController

@@ -9,7 +9,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * ProductsReceivedNote Model
+ * ProductsReceivedNotes Model
  *
  * @method \App\Model\Entity\ProductsReceivedNote newEmptyEntity()
  * @method \App\Model\Entity\ProductsReceivedNote newEntity(array $data, array $options = [])
@@ -25,7 +25,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\ProductsReceivedNote[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\ProductsReceivedNote[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class ProductsReceivedNoteTable extends Table
+class ProductsReceivedNotesTable extends Table
 {
     /**
      * Initialize method
@@ -37,13 +37,9 @@ class ProductsReceivedNoteTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('products_received_note');
+        $this->setTable('products_received_notes');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-        //$this->belongTo('Employees',[
-       //         'foreignKey'=>'stockkeeper_fk']);
-       // $this->belongTo('Employees',[
-          //  'foreignKey'=>'approver_fk']);
     }
 
     /**
